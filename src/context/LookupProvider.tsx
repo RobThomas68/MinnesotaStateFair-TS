@@ -1,54 +1,57 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import db from "../data/db.json";
+import { VendorContext, VendorContextType } from "./VendorProvider";
 
 export interface ItemToVendorIDsType {
   id: string;
   vendorIDs: string[];
 }
-export type ItemToVendorIDsMap = Map<string, ItemToVendorIDsType>;
-export type ItemToVendorIDsMapArray = Array<ItemToVendorIDsMap>;
+export type ItemToVendorIDsMap = Map<string, string[]>;
 
 export interface VendorToItemIDsType {
   id: string;
   itemIDs: string[];
 }
-export type VendorToItemIDsMap = Map<string, VendorToItemIDsType>;
-export type VendorToItemIDsMapArray = Array<VendorToItemIDsMap>;
+export type VendorToItemIDsMap = Map<string, string[]>;
 
 export interface LookupContextType {
-  itemToVendors: ItemToVendorIDsMapArray;
-  setItemToVendors: React.Dispatch<
-    React.SetStateAction<ItemToVendorIDsMapArray>
-  >;
-  vendorToItems: VendorToItemIDsMapArray;
-  setVendorToItems: React.Dispatch<
-    React.SetStateAction<VendorToItemIDsMapArray>
-  >;
+  itemToVendors: ItemToVendorIDsMap;
+  setItemToVendors: React.Dispatch<React.SetStateAction<ItemToVendorIDsMap>>;
+  vendorToItems: VendorToItemIDsMap;
+  setVendorToItems: React.Dispatch<React.SetStateAction<VendorToItemIDsMap>>;
+
+  itemVendorNames: (id: string) => string[];
 }
 
 export const LookupContext = createContext<LookupContextType | null>(null);
 
-type Props = {
+interface Props {
   children?: React.ReactNode;
-};
+}
 
-const LookupProvider: React.FC<Props> = ({ children }) => {
-  const [itemToVendors, setItemToVendors] = useState(
-    [] as ItemToVendorIDsMapArray
-  );
-  const [vendorToItems, setVendorToItems] = useState(
-    [] as VendorToItemIDsMapArray
-  );
+const LookupProvider = ({ children }: Props) => {
+  const [itemToVendors, setItemToVendors] = useState({} as ItemToVendorIDsMap);
+  const [vendorToItems, setVendorToItems] = useState({} as VendorToItemIDsMap);
+
+  const { vendors } = useContext(VendorContext) as VendorContextType;
+
+  const getVendorName = (id: string) => {
+    const v = vendors.find((vendor) => vendor.id === id);
+    return v ? v.name : "";
+  };
+
+  const itemVendorNames = (id: string) => {
+    const v = itemToVendors.get(id);
+    return v ? v.map((id: string) => getVendorName(id)) : [];
+  };
 
   useEffect(() => {
-    const itemToVendorsArray = new Array(
-      new Map(db.itemToVendors.map((obj) => [obj.id, obj]))
+    setItemToVendors(
+      new Map(db.itemToVendors.map((obj) => [obj.id, obj.vendorIDs]))
     );
-    setItemToVendors(itemToVendorsArray);
-    const vendorToItemsArray = new Array(
-      new Map(db.vendorToItems.map((obj) => [obj.id, obj]))
+    setVendorToItems(
+      new Map(db.vendorToItems.map((obj) => [obj.id, obj.itemIDs]))
     );
-    setVendorToItems(vendorToItemsArray);
   }, []);
 
   return (
@@ -58,6 +61,8 @@ const LookupProvider: React.FC<Props> = ({ children }) => {
         setItemToVendors,
         vendorToItems,
         setVendorToItems,
+
+        itemVendorNames,
       }}
     >
       {children}

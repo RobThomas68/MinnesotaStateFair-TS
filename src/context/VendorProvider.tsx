@@ -4,6 +4,7 @@ import db from "../data/db.json";
 export interface VendorType {
   id: string;
   name: string;
+  directions: string;
   latitude: number;
   longitude: number;
 }
@@ -20,11 +21,11 @@ export interface VendorContextType {
 
 export const VendorContext = createContext<VendorContextType | null>(null);
 
-type Props = {
+interface Props {
   children?: React.ReactNode;
-};
+}
 
-const VendorProvider: React.FC<Props> = ({ children }) => {
+const VendorProvider = ({ children }: Props) => {
   const [vendorSearch, setVendorSearch] = useState("");
   const [vendorSearchResults, setVendorSearchResults] = useState(
     [] as VendorArrayType

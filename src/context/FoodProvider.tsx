@@ -20,11 +20,11 @@ export interface FoodContextType {
 
 export const FoodContext = createContext<FoodContextType | null>(null);
 
-type Props = {
+interface Props {
   children?: React.ReactNode;
-};
+}
 
-const FoodProvider: React.FC<Props> = ({ children }) => {
+const FoodProvider = ({ children }: Props) => {
   const [foodSearch, setFoodSearch] = useState("");
   const [foodSearchResults, setFoodSearchResults] = useState(
     [] as FoodArrayType

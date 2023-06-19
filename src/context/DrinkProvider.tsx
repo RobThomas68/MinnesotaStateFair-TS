@@ -24,11 +24,11 @@ export interface DrinkContextType {
 
 export const DrinkContext = createContext<DrinkContextType | null>(null);
 
-type Props = {
+interface Props {
   children?: React.ReactNode;
-};
+}
 
-const DrinkProvider: React.FC<Props> = ({ children }) => {
+const DrinkProvider = ({ children }: Props) => {
   const [drinkSearch, setDrinkSearch] = useState("");
   const [drinkSearchResults, setDrinkSearchResults] = useState(
     [] as DrinkArrayType
