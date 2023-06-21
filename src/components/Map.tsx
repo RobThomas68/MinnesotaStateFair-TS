@@ -18,6 +18,11 @@ import { LatLngTuple } from "leaflet";
 // import { IconContext } from "react-icons";
 // import { MdGpsFixed } from 'react-icons/md';
 import L from "leaflet";
+import {
+  FavoriteContext,
+  FavoriteContextType,
+} from "../context/FavoriteProvider";
+import { useContext } from "react";
 
 // delete L.Icon.Default.prototype._getIconUrl;
 // L.Icon.Default.mergeOptions({
@@ -58,7 +63,9 @@ import L from "leaflet";
 //   }
 
 const Map = () => {
-  // const { favorites, vendorFavoriteItemNames } = useContext(DataContext);
+  const { favorites, vendorFavoriteItemNames } = useContext(
+    FavoriteContext
+  ) as FavoriteContextType;
 
   const center: LatLngTuple = [44.98106, -93.174351];
   const zoom = 20;
@@ -66,17 +73,17 @@ const Map = () => {
     '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
   const url = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
-  // const favoritesToMap = favorites.filter((favorite) =>
-  //     favorite.hasOwnProperty("latitude")
-  // );
+  const favoritesToMap = favorites.filter((favorite) =>
+    Object.prototype.hasOwnProperty.call(favorite, "latitude")
+  );
 
-  const favoritesToMap = [
-    {
-      name: "The Blue Barn",
-      latitude: 44.9810468345,
-      longitude: -93.1762321692,
-    },
-  ];
+  // const favoritesToMap = [
+  //   {
+  //     name: "The Blue Barn",
+  //     latitude: 44.9810468345,
+  //     longitude: -93.1762321692,
+  //   },
+  // ];
 
   // const formatTimestamp = (s) => {
   //   return new Date(s * 1000).toISOString();
@@ -131,16 +138,16 @@ const Map = () => {
         {favoritesToMap.map((f, index) => (
           <Marker
             key={index}
-            position={[f.latitude, f.longitude]}
+            position={[f.latitude, f.longitude] as LatLngTuple}
             icon={markerIconGreen}
           >
             <Popup>
               <h4>{f.name}</h4>
-              {/* <ul>
+              <ul>
                 {vendorFavoriteItemNames(f.id).map((name, index) => (
                   <li key={index}>{name}</li>
                 ))}
-              </ul> */}
+              </ul>
             </Popup>
           </Marker>
         ))}

@@ -1,18 +1,16 @@
 import { useContext } from "react";
 import { BsStarFill, BsStar } from "react-icons/bs";
-
-import { VendorType } from "../context/VendorProvider";
 import {
   FavoriteContext,
   FavoriteContextType,
+  FavoriteType,
 } from "../context/FavoriteProvider";
 
 interface Props {
-  feedItem: VendorType;
+  feedItem: FavoriteType;
 }
-
-const VendorFeedItem = ({ feedItem }: Props) => {
-  const { isFavorite, onFavoriteClick } = useContext(
+const FavoriteFeedItem = ({ feedItem }: Props) => {
+  const { vendorFavoriteItemNames, isFavorite, onFavoriteClick } = useContext(
     FavoriteContext
   ) as FavoriteContextType;
 
@@ -36,9 +34,12 @@ const VendorFeedItem = ({ feedItem }: Props) => {
           )}
         </div>
       </div>
-      <p className="directions">{feedItem.directions}</p>
+      {Object.prototype.hasOwnProperty.call(feedItem, "directions") && (
+        <p className="directions">{feedItem.directions}</p>
+      )}
+      {<p>{vendorFavoriteItemNames(feedItem.id).join(", ")}</p>}
     </article>
   );
 };
 
-export default VendorFeedItem;
+export default FavoriteFeedItem;

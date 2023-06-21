@@ -11,6 +11,7 @@ import DrinkProvider from "./context/DrinkProvider";
 import FoodProvider from "./context/FoodProvider";
 import VendorProvider from "./context/VendorProvider";
 import LookupProvider from "./context/LookupProvider";
+import FavoriteProvider from "./context/FavoriteProvider";
 
 function App() {
   return (
@@ -18,19 +19,21 @@ function App() {
       <DrinkProvider>
         <VendorProvider>
           <LookupProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<Layout />}>
-                  <Route index element={<Favorites />} />
-                  <Route path="favorites" element={<Favorites />} />
-                  <Route path="foods" element={<Foods />} />
-                  <Route path="drinks" element={<Drinks />} />
-                  <Route path="drink/:id" element={<DrinkDetails />} />
-                  <Route path="vendors" element={<Vendors />} />
-                  <Route path="map" element={<Map />} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
+            <FavoriteProvider>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<Layout />}>
+                    <Route index element={<Favorites />} />
+                    <Route path="favorites" element={<Favorites />} />
+                    <Route path="foods" element={<Foods />} />
+                    <Route path="drinks" element={<Drinks />} />
+                    <Route path="drink/:id" element={<DrinkDetails />} />
+                    <Route path="vendors" element={<Vendors />} />
+                    <Route path="map" element={<Map />} />
+                  </Route>
+                </Routes>
+              </BrowserRouter>
+            </FavoriteProvider>
           </LookupProvider>
         </VendorProvider>
       </DrinkProvider>
