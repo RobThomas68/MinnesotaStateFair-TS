@@ -1,8 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { VendorContext, VendorContextType, VendorType } from "./VendorProvider";
+import { VendorContext, VendorContextType } from "./VendorProvider";
 import { LookupContext, LookupContextType } from "./LookupProvider";
-import { FoodType } from "./FoodProvider";
-import { DrinkType } from "./DrinkProvider";
 
 export interface FavoriteType {
   id: string;
