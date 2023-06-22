@@ -46,7 +46,6 @@ const FavoriteProvider = ({ children }: Props) => {
     [] as FavoriteArrayType
   );
 
-  // const [favorites, setFavorites] = useState([] as FavoriteArrayType);
   const [favorites, setFavorites] = useState(
     (JSON.parse(
       localStorage.getItem("favorites") || "[]"
@@ -54,7 +53,7 @@ const FavoriteProvider = ({ children }: Props) => {
   );
 
   const isFavorite = (favorite: FavoriteType) => {
-    return favorites.includes(favorite);
+    return favorites.some((f) => favorite.id === f.id);
   };
 
   const onFavoriteClick = (favorite: FavoriteType) => {
