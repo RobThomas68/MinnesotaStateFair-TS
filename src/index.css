@@ -241,9 +241,8 @@ body {
 
 .SaveLoadFavorites input,
 .SaveLoadFavorites button {
-  font-size: 18px;
   padding: 0.25rem;
-  margin: 0.5rem;
+  margin: 0.25rem;
 }
 
 .newPostForm input[type="text"],
