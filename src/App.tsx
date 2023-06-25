@@ -6,6 +6,7 @@ import DrinkDetails from "./components/DrinkDetails";
 import Foods from "./components/Foods";
 import Vendors from "./components/Vendors";
 import Map from "./components/Map";
+import Lab from "./components/Lab";
 import Login from "./components/Login";
 import RequireAuth from "./components/ReauireAuth";
 
@@ -54,8 +55,13 @@ function App() {
                       <Route element={<RequireAuth />}>
                         <Route path="vendors" element={<Vendors />} />
                       </Route>
+
                       <Route element={<RequireAuth />}>
                         <Route path="map" element={<Map />} />
+                      </Route>
+
+                      <Route element={<RequireAuth />}>
+                        <Route path="lab" element={<Lab />} />
                       </Route>
                     </Route>
                   </Routes>

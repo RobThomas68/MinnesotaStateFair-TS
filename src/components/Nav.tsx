@@ -6,6 +6,7 @@ import {
   FaLandmark,
   FaMapMarkedAlt,
 } from "react-icons/fa";
+import { ImLab } from "react-icons/im";
 
 const Nav = () => {
   return (
@@ -34,6 +35,11 @@ const Nav = () => {
         <li>
           <NavLink to="/map" title="Map">
             <FaMapMarkedAlt />
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/lab" title="Lab">
+            <ImLab />
           </NavLink>
         </li>
       </ul>

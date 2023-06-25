@@ -143,6 +143,7 @@ body {
 .Vendors,
 .Map,
 .Lab,
+.Login,
 .Missing,
 .Settings,
 .About {
@@ -192,20 +193,19 @@ body {
 .Login form {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
   flex-grow: 1;
-  padding-top: 1rem;
+  padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
 .Login input {
   font-size: 24px;
   padding: 0.5rem;
-  width: 300px;
+  /* width: 300px; */
 }
 
-.SaveLoadFavorites input,
-.SaveLoadFavorites button {
+.Lab input,
+.Lab button {
   padding: 0.25rem;
   margin: 0.25rem;
 }
