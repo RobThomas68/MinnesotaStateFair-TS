@@ -136,18 +136,18 @@ body {
   color: #66d8f5;
 }
 
-.Nav li:hover,
+/* .Nav li:hover,
 .Nav li:focus,
-.Nav li:hover a,
+.Nav li:hover a
 .Nav li:focus a {
   background-color: #eee;
   color: #333;
-}
+} */
 
-.Nav li:hover a,
+/* .Nav li:hover a,
 .Nav li:focus a {
   cursor: pointer;
-}
+} */
 
 .Home,
 .NewPost,
@@ -313,13 +313,13 @@ body {
     text-align: right;
   }
 
-  .Nav li:hover,
+  /* .Nav li:hover,
   .Nav li:focus,
   .Nav li:hover a,
   .Nav li:focus a {
-    background-color: #eee;
-    color: #333;
-  }
+    background-color: #000;
+    color: #000;
+  } */
 
   /* .searchForm {
     width: 50%;
