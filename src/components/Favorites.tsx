@@ -34,6 +34,7 @@ const Favorites = () => {
     if (user) {
       const docRef = doc(db, "users", user);
       const docSnap = await getDoc(docRef);
+      document.body.requestFullscreen();
 
       if (docSnap.exists()) {
         console.log("Document data:", docSnap.data());
