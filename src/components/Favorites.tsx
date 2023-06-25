@@ -8,6 +8,7 @@ import FavoriteFeed from "./FavoriteFeed";
 
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../config/Firestore";
+import useAuth from "../hooks/useAuth";
 
 const Favorites = () => {
   const {
@@ -19,6 +20,8 @@ const Favorites = () => {
   } = useContext(FavoriteContext) as FavoriteContextType;
 
   const [user, setUser] = useState("");
+
+  const { logout } = useAuth();
 
   const handleSaveClick = async () => {
     if (user) {
@@ -43,6 +46,14 @@ const Favorites = () => {
     }
   };
 
+  const handleLogoutClick = async () => {
+    try {
+      logout();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <div className="searchBar">
@@ -58,10 +69,9 @@ const Favorites = () => {
         </form>
       </div>
 
-      <div>
+      <div className="SaveLoadFavorites">
         <input
           type="text"
-          id="user"
           name="user"
           value={user}
           onChange={(e) => setUser(e.target.value)}
@@ -70,9 +80,11 @@ const Favorites = () => {
         <button type="button" onClick={handleSaveClick}>
           Save
         </button>
-
         <button type="button" onClick={handleLoadClick}>
           Load
+        </button>
+        <button type="button" onClick={handleLogoutClick}>
+          Logout
         </button>
       </div>
 

@@ -1,7 +1,5 @@
-import { useContext } from "react";
-
-import { DrinkContext, DrinkContextType } from "../context/DrinkProvider";
 import DrinkFeed from "./DrinkFeed";
+import { useDrinks } from "../hooks/useProviders";
 
 const Drinks = () => {
   const {
@@ -12,7 +10,7 @@ const Drinks = () => {
     setIsOnlyAtFair,
     isNew,
     setIsNew,
-  } = useContext(DrinkContext) as DrinkContextType;
+  } = useDrinks();
 
   const handleIsOnlyAtTheFairOnChange = () => {
     setIsOnlyAtFair(!isOnlyAtFair);

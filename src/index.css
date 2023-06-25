@@ -224,6 +224,28 @@ body {
   margin-top: 1rem;
 }
 
+.Login form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  padding-top: 1rem;
+  padding-bottom: 2rem;
+}
+
+.Login input {
+  font-size: 24px;
+  padding: 0.5rem;
+  width: 500px;
+}
+
+.SaveLoadFavorites input,
+.SaveLoadFavorites button {
+  font-size: 18px;
+  padding: 0.25rem;
+  margin: 0.5rem;
+}
+
 .newPostForm input[type="text"],
 .newPostForm textarea {
   font-family: "Open Sans", sans-serif;

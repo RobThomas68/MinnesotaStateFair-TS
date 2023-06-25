@@ -6,7 +6,10 @@ import DrinkDetails from "./components/DrinkDetails";
 import Foods from "./components/Foods";
 import Vendors from "./components/Vendors";
 import Map from "./components/Map";
+import Login from "./components/Login";
+import RequireAuth from "./components/ReauireAuth";
 
+import AuthProvider from "./context/AuthProvider";
 import DrinkProvider from "./context/DrinkProvider";
 import FoodProvider from "./context/FoodProvider";
 import VendorProvider from "./context/VendorProvider";
@@ -15,29 +18,54 @@ import FavoriteProvider from "./context/FavoriteProvider";
 
 function App() {
   return (
-    <FoodProvider>
-      <DrinkProvider>
-        <VendorProvider>
-          <LookupProvider>
-            <FavoriteProvider>
-              <BrowserRouter>
-                <Routes>
-                  <Route path="/" element={<Layout />}>
-                    <Route index element={<Favorites />} />
-                    <Route path="favorites" element={<Favorites />} />
-                    <Route path="foods" element={<Foods />} />
-                    <Route path="drinks" element={<Drinks />} />
-                    <Route path="drink/:id" element={<DrinkDetails />} />
-                    <Route path="vendors" element={<Vendors />} />
-                    <Route path="map" element={<Map />} />
-                  </Route>
-                </Routes>
-              </BrowserRouter>
-            </FavoriteProvider>
-          </LookupProvider>
-        </VendorProvider>
-      </DrinkProvider>
-    </FoodProvider>
+    <AuthProvider>
+      <FoodProvider>
+        <DrinkProvider>
+          <VendorProvider>
+            <LookupProvider>
+              <FavoriteProvider>
+                <BrowserRouter>
+                  <Routes>
+                    <Route path="/" element={<Layout />}>
+                      {/* public routes */}
+                      <Route path="login" element={<Login />} />
+
+                      {/* private routes */}
+                      <Route element={<RequireAuth />}>
+                        <Route index element={<Favorites />} />
+                      </Route>
+
+                      <Route element={<RequireAuth />}>
+                        <Route path="favorites" element={<Favorites />} />
+                      </Route>
+
+                      <Route element={<RequireAuth />}>
+                        <Route path="foods" element={<Foods />} />
+                      </Route>
+
+                      <Route element={<RequireAuth />}>
+                        <Route path="drinks" element={<Drinks />} />
+                      </Route>
+
+                      <Route element={<RequireAuth />}>
+                        <Route path="drink/:id" element={<DrinkDetails />} />
+                      </Route>
+
+                      <Route element={<RequireAuth />}>
+                        <Route path="vendors" element={<Vendors />} />
+                      </Route>
+                      <Route element={<RequireAuth />}>
+                        <Route path="map" element={<Map />} />
+                      </Route>
+                    </Route>
+                  </Routes>
+                </BrowserRouter>
+              </FavoriteProvider>
+            </LookupProvider>
+          </VendorProvider>
+        </DrinkProvider>
+      </FoodProvider>
+    </AuthProvider>
   );
 }
 
